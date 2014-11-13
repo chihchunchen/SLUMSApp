@@ -10,6 +10,9 @@
     <title>SLUMS Examination</title>
     
     <script type="text/javascript">
+
+    //Function used by moveEventFunction to detect where on the appplication canvas the event has taken place.
+    //Takes into account different platforms - Firefox, Chrome, Safari.
     function getCoords(e) {
             if (e.offsetX) {
                 // Works in Chrome / Safari (except on iPad/iPhone)
@@ -26,10 +29,12 @@
         }
 
 
-        var p1;
-        var currentDrawCanvas;
-  
+        var p1; //Coordinates for location on the application canvas that has been touched.
+        var currentDrawCanvas; //Current state of application canvas.
+    
+        //Sets the p1 variable to reflect position of the touch event.
         function moveEventFunction(e) {
+
           if(currentDrawCanvas){
             ctx = currentDrawCanvas.getContext("2d");  
 
@@ -53,6 +58,7 @@
           return false; // Stop event bubbling up and doing other stuff (like pinch zoom or scroll)
         }
 
+        //Draws a circle on the application canvas.
        function drawCircle(domElement){
           $(domElement).attr("width", 500)
           $(domElement).attr("height", 500)
@@ -65,6 +71,7 @@
           ctx.stroke();
         }
 
+        //Draws a box on the application canvas. 
         function drawBoxes(domElement){
           console.log("drawBoxes")
 
@@ -92,10 +99,13 @@
         var currentQuestion = JSON.parse(localStorage.getItem("current_item"))
         console.log("Loaded current object:", currentQuestion)
       }else{
+
+        console.log("No current obbject.")
         var currentQuestion = {};
-      }
+       }
 
     $(document).bind('touchmove', false);
+
 
       $(document).ready(function(){
 
@@ -104,39 +114,46 @@
           currentQuestion[evt.target.name] = evt.target.value;
           localStorage.setItem("current_item", JSON.stringify(currentQuestion));
 
+
           console.log("saved:", currentQuestion)
         });
 
         $(".question").each(function(i,e){
           $(e).attr("id","q"+i)
 
-          var btn = $('<input type="button" class="next" value="Next">');
-          btn.attr("data-to",i+1)
-          btn.attr("data-id",i)
+          var btn = $('<input type="button" class="next" value="Next">'); //'Next' button
 
+          btn.attr("data-to",i+1) //'Next' Button associated with next page (question).          
+          btn.attr("data-id",i) //Let the 'Next' button know what page (question) it's currently on.
+
+          //Function that determines what action to take when the 'Next' button is clicked.
           btn.bind('click', function(ev){
             var toId = $(ev.target).data("to")
-            $(".question").hide()
-            $("#q"+toId).show()
-            location.hash = "#q"+toId
+            $(".question").hide()//Hide previous page
+            $("#q"+toId).show()  //Show next page
+            location.hash = "#q"+toId //Moves to next page.
           });
 
-          $(e).append(btn)
+
+          $(e).append(btn) //'Next' button now listens for events
 
 
-          var btn2 = $('<input type="button" class="over" value="start over">');
+          var btn2 = $('<input type="button" class="over" value="start over">'); // 'Start over' button (i.e. detects when it is clicked).
+          //Function that determines what action to take when the 'Start over' button is clicked.
           btn2.bind('click', function(ev){
 
+            //Display a pop-up box that asks user to confirm action
             if(confirm("really start over?")){
+              //Resest the page (question) number
               location.hash = "#q0";
+              //Reload the page.
               location.reload();
             }
           });
-          $(e).append(btn2)
+          $(e).append(btn2) //'Start over' button now listens for events (i.e. detects when it is clicked)
 
-
-          var btn2 = $('<div class="number">'+i+'</div>');
-          $(e).append(btn2)
+          //var btn2 = $('<div class="number">'+i+'</div>');
+          //$(e).append(btn2)
 
 
         });
@@ -152,25 +169,29 @@
         $(hId).show()
 
         can = document.getElementById("canvas1");
+        //Draws circle when 'canvas1' is available
         drawCircle(can);
         can.ontouchstart = function(e){
           currentDrawCanvas = document.getElementById("canvas1");
         }
-        can.ontouchmove = moveEventFunction;
-        can.onmousemove = moveEventFunction;
+        can.ontouchmove = moveEventFunction; //Calls moveEventFunction when touched.
+        can.onmousemove = moveEventFunction; //Calls moveEventFunction when mouse moved.
         can.ontouchend = function(e){
+          //Resets p1
           p1 = null;
         };
 
 
         var can2 = document.getElementById("canvas2");
+        //Draws boxes when 'canvas2 is available'
         drawBoxes(can2);
         can2.ontouchstart = function(e){
           currentDrawCanvas = document.getElementById("canvas2");
         }
-        can2.ontouchmove = moveEventFunction;
-        can2.onmousemove = moveEventFunction;
+        can2.ontouchmove = moveEventFunction;  //Calls moveEventFunction when touched
+        can2.onmousemove = moveEventFunction; //Calls moveEventFunction when mouse moved.
         can2.ontouchend = function(e){
+          //Resets p1
           p1 = null;
         };
       });
