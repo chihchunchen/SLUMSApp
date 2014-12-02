@@ -8,6 +8,7 @@
   	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     
     <title>SLUMS Examination</title>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     
     <script type="text/javascript">
 
@@ -407,6 +408,7 @@
         }
     }
 
+  
     
 
 </script>
@@ -418,16 +420,42 @@
         font-family:'Arial Rounded MT Bold';
       }
       /*Formatting for questions (pages)*/
-    	.question{
-    		position: absolute;
-    		top:0px;
-    		left:0px;
-    		right:0px;
-    		bottom:0px;
+    	.title{
 
+        text-align: center;
+      }
+
+      .question{
+    		
+        text-align: center;
     		display: none;
     		padding: 30px;
     	}
+
+
+        #header {
+       background-color:black;
+       height:100px;
+       color:white;
+        text-align:center;
+        padding:5px;
+       }
+
+       #section {
+        float:left;
+        float:top;
+        padding:10px;  
+        text-align: "center";
+        width:fixed:100%;
+        }
+
+       .headerclass {
+        background:#000000;
+        border:1px solid #CCC;
+        width:fixed:100%;
+        margin:0px auto;
+        top:0px;
+      }
 
       .number{
         position: absolute;
@@ -441,13 +469,13 @@
       .next{
         position: absolute;
         right:0px;
-        bottom:10px;
+        top:10px;
       }    
 
       .over{
         position: absolute;
         left:0px;
-        bottom:10px;
+        top:10px;
       }
 
       
@@ -459,7 +487,7 @@
       .database{
         position: absolute;
         left:0px;
-        bottom:10px;      
+        top:10px;      
       }
 
       #q16 .next{
@@ -498,11 +526,33 @@
   </head>
   <body>
 
+   
+    
+    
     <!--form id="form1" name="form1" method="post" action="getData"-->
-  	<div class="question" title="info">
+
+    <!-- Title Page -->
+      <div id="header">
+      <h1>Screening Test</h1>
+      </div>  
+    <div class = "question">
+    <div id="section">
+      This is an initial application designed to investigate whether mobile devices are suitable to adminster apps which affect mental health. This is NOT a screening test for dementia. We are not qualified to diagnose dementia, nor are we trying to. We are using the St Loius University Mental Status Exams (SLUMS) as an example of such a test. If you wish to participate in the study, please press next to  continue.
+       <input type="submit" class="database" onclick="seeDatabase();" value="See local database" />
+      </div>
+
+      </div>
+
+
+    <!-- Question -->
+  	  
+
+
+      <div id="section">
+    <div  align="center" class="question" title="info">
 
       <table>
-        <tr><td><h2>First name</h2></td><td><input id="first_name" name="first_name" type="text" value=""/></tr>
+        <tr><td><h2><center>First name</h2></td><td><center><input id="first_name" name="first_name" type="text" value=""/></tr></center>
         <tr><td><h2>Surname</h2></td><td><input id="surname" name="surname" type="text" value=""/></tr>
         <tr><td><h2>Age</h2></td><td><input id = "age" name="age" type="number" value=""/></td></tr>
         <tr><td><h2>Date of birth</h2></td><td><input id="dob" name="dob" type="date" value=""></td></tr>
@@ -517,28 +567,46 @@
                     <option label="Other" value="Other"></option>
         </datalist>
       </table>
-  	 <input type="submit" class="database" onclick="seeDatabase();" value="See local database" />
+  	 
       
   	</div>
+  </div>
 
+    <div align='center' class = "question">
+    <h2> Does this work </h2>
+    </div>   
+   
+    <div  align="center" class="question">
+      <h2> What day of the week is it?  </h2>
+      <p>
+      The correct day is <console.log('n'>
+      <script>
+src="slums.js"
+var q1Correct
+</script>
+      <div id="day">
+      </p>
+      </div>
+    
 
-    <div class="question">
-      <h2>What day of the week is it?</h2>
       <input id="q1" name="q1" type="text" value=""/>
-
+  
+    </div>
     </div>
 
-    <div class="question">
-      <h2>What is the year?</h2>
+    
+
+    <div  align="center" class="question">   
+      <h2>What is the year?</h2> 
       <input id="q2" name="q2" type="number" value=""/>
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>What county are we in?</h2>
       <input id="q3" name="q3" type="text" value=""/>
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>Please remember these five objects? I will ask you what they are later.</h2>
       <ul>
         <li>Apple</li>
@@ -549,7 +617,7 @@
       </ul>
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>You have $100 and you go to the store and buy a dozen apples for $3 and a tricyle for $20.</h2>
 
       <h2>How much did you spend</h2>
@@ -560,14 +628,14 @@
 
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>Please name as many animals as you can in one minute.</h2>
 
         <tr><td><textarea id="q6" name="q6" rows=20 value=""></textarea></td></tr>       
     
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>What were the five objects I asked you to remember</h2>
 
         <tr><td><textarea id="q7" name="q7" rows=5 value=""></textarea></td></tr>
@@ -575,7 +643,7 @@
     
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <h2>I'm going to give you a series of numbers and I would like you to give them to me backwards. For Example, if I say 42, you would say 24.</h2>
 
       
@@ -587,7 +655,7 @@
 
     </div>
 
-    <div class="question">
+    <div  align="center" class="question">
       <span style="font-size:14px;">This is a clock face.<br>
        Please input in the hour markers and <u>the time</u> at ten minutes to eleven o'clock.</span>
       <canvas id="canvas1"></canvas>
@@ -595,11 +663,11 @@
       
   </div>
 
-  <div class="question">
+  <div  align="center" class="question">
     <h1>Please hand the tablet back to the test assistant.</h1>
   </div>
 
-  <div class="question">
+  <div  align="center" class="question">
     <h2>clock input correct?</h2>
 
 
@@ -610,7 +678,7 @@
     
   </div>
 
-  <div class="question">
+  <div  align="center" class="question">
       <h2>Please place an X in the triangle</h2>
 
       <canvas id="canvas2"></canvas>
@@ -622,17 +690,17 @@
 
   </div>
 
-   <div class="question">
+   <div  align="center" class="question">
     <h1>Please hand the tablet back to the test assistant.</h1>
   </div>
 
 
-  <div class="question">
+  <div  align="center" class="question">
     <h2>was the x correct?</h2>
     <input id="q10a" name="q10a" type="checkbox"/>
   </div>
 
-  <div class="question">
+  <div  align="center" class="question">
     <h2>I am going to tell you a story. Please listen carefully because afterwards, I'm going to ask you some questions about it.</h2>
     <p>
       Jill was a very successfull stockbroker. 
@@ -657,11 +725,12 @@
     <input type="submit" name="submit" id="submit" value="Submit"/>
     </p-->
   </div>
-  <div class="question">
+
+  <div  align="center" class="question">
     <input type="submit" onclick="saveCurrent();" value="save data in local database" />
   </div>
 
-  <div id="local_database">
+  <div  align="center" id="local_database">
     <input type="submit" onclick="submitData();" value="submit via mail csv" />
     <input type="submit" onclick="clearLocalData();" value="delete all data" />
 
@@ -678,6 +747,8 @@
     </table>
 
   </div>
+
+
 
   
   <!--/form-->
