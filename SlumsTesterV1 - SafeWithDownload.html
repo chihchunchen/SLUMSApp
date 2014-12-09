@@ -11,6 +11,8 @@
     <!--script src="//code.jquery.com/jquery-1.10.2.js"></script-->
     
     <script type="text/javascript">
+    var now = new Date(Date.now());
+
 
     //Function used by moveEventFunction to detect where on the appplication canvas the event has taken place.
     //Takes into account different platforms - Firefox, Chrome, Safari.
@@ -175,6 +177,7 @@
     var responses = [];//Array to hold all the responses.
     var mouseX;
     var mouseY;
+
     
     //Sets the p1 variable to reflect position of the touch event.
     function moveEventFunction(e) {
@@ -309,7 +312,7 @@
 
       $(".export").on('click', function (event) {
         // CSV
-        exportTableToCSV.apply(this, [$('#dvData>table'), 'export.csv']);
+        exportTableToCSV.apply(this, [$('#dvData>table'),  now.getFullYear().toString() + "_" + now.getMonth().toString() + 'Data.tsv']);
         
         // IF CSV, don't do event.preventDefault() or return false
         // We actually need this to be a typical hyperlink
